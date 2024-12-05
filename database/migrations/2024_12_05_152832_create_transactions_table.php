@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('account_id')->constrained();
             $table->bigInteger('amount');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->foreignId('category_id')->nullable()->constrained();
             $table->timestamp('transaction_date');
             $table->timestamps();

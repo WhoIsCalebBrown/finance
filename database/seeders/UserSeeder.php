@@ -22,17 +22,14 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Checking Account',
                 'type' => 'checking',
-                'balance' => 5000_00, // $5,000
             ],
             [
                 'name' => 'Savings Account',
                 'type' => 'savings',
-                'balance' => 10000_00, // $10,000
             ],
             [
                 'name' => 'Credit Card',
                 'type' => 'credit',
-                'balance' => -2000_00, // -$2,000
             ],
         ];
 
@@ -41,7 +38,6 @@ class UserSeeder extends Seeder
                 'user_id' => $user->id,
                 'name' => $accountData['name'],
                 'type' => $accountData['type'],
-                'balance' => $accountData['balance'],
             ]);
 
             // Generate 100+ transactions for each account
