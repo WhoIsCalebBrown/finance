@@ -9,6 +9,11 @@ class NetWorthService
 {
     public function calculateNetWorthForUser(User $user): int
     {
-        $user->accounts()
+        $accounts = $user->accounts()->with('transactions')->get()->toArray();
+
+        return collect($accounts)->sum(function ($account) {
+            return collect($account['transactions'])->sum('amount');
+        });
     }
+
 }

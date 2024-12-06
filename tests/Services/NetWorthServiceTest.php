@@ -8,7 +8,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Services\NetWorthService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;;
+use Tests\TestCase;
 
 class NetWorthServiceTest extends TestCase
 {
@@ -17,14 +17,15 @@ class NetWorthServiceTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $account = Account::create([
+        $account1 = Account::create([
             'user_id' => $user->id,
-            'name' => 'Credit Card',
-            'type' => 'savings',
+            'name' => 'Checking',
+            'type' => 'checking',
         ]);
 
-        $transaction = Transaction::factory()->count(10)->create(['account_id' => $account->id]);
+        Transaction::factory()->count(2)->create(['account_id' => $account1->id, 'amount' => 100]);
 
-        $this->fail();
+        $netWorth = app(NetWorthService::class)->calculateNetWorthForUser($user);
+        $this->assertEquals(200, $netWorth);
     }
 }
